@@ -192,6 +192,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CarController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -210,6 +211,16 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Car carousel content\cabriolet.jpg" />
+    <Content Include="Content\Car carousel content\coupe.jpg" />
+    <Content Include="Content\Car carousel content\crossover.jpg" />
+    <Content Include="Content\Car carousel content\limousine.jpg" />
+    <Content Include="Content\Car carousel content\minibus.jpg" />
+    <Content Include="Content\Car carousel content\minivan.jpg" />
+    <Content Include="Content\Car carousel content\offroad.jpg" />
+    <Content Include="Content\Car carousel content\pickup.jpg" />
+    <Content Include="Content\Car carousel content\sedan.jpeg" />
+    <Content Include="Content\Car carousel content\universal.jpeg" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -302,6 +313,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Car\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

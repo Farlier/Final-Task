@@ -1,6 +1,4 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -21,4 +19,43 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+
+.nav-btn {
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-top: 0.5rem;
+    display: block;
+    box-sizing: border-box;
+    background-color: #ecf0f1;
+    color: black;
+}
+
+    .nav-btn:hover {
+        background-color: #fdcb6e;
+        color: dimgray;
+    }
+
+.navbar-padding {
+    padding: 0px;
+}
+
+.navbar-background {
+    background-color: #ecf0f1;
+}
+
+
+
+.disable-text-decoration {
+    text-decoration: none;
+}
+
+    .disable-text-decoration:hover {
+        text-decoration: none;
+    }
+
+.my-no-gutters {
+    padding-right: 0;
+    padding-left: 0;
 }
