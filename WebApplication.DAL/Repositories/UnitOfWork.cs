@@ -9,7 +9,7 @@ using WebApplication.DAL.Interfaces;
 
 namespace WebApplication.DAL.Repositories
 {
-    public class EFUnitOfWork : IUnitOfWork
+    public class UnitOfWork : IUnitOfWork
     {
         private CarContext db;
         CarModelRepository carModelRepository;
@@ -19,7 +19,7 @@ namespace WebApplication.DAL.Repositories
         OrderRepository orderRepository;
         QualityClassRepository qualityClassRepository;
 
-        public EFUnitOfWork(string connectionString)
+        public UnitOfWork(string connectionString)
         {
             db = new CarContext(connectionString);
         }

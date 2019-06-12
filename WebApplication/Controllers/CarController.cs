@@ -1,17 +1,29 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebApplication.BLL.DataTransferObjects;
+using WebApplication.BLL.Interfaces;
+using WebApplication.Models;
 
 namespace WebApplication.Controllers
 {
     public class CarController : Controller
     {
+        IOrderService orderService;
+        public CarController(IOrderService service)
+        {
+            orderService = service;
+        }
         // GET: Car
         public ActionResult CarList()
         {
-            return View();
+            IEnumerable<CarDTO> carsDTOs = orderService.GetCars();
+            var mapper = new MapperConfiguration(cg => cg.CreateMap<CarDTO, CarViewModel>()).CreateMapper();
+            var cars = mapper.Map<IEnumerable<CarDTO>, List<CarViewModel>>(carsDTOs);
+            return View(cars);
         }
 
         // GET: Car/Details/5

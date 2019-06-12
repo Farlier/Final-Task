@@ -13,5 +13,6 @@ namespace WebApplication.DAL.Entities
         public int CarId { get; set; }
         public Car Car { get; set; }
         public bool WithDriver { get; set; }
+        public decimal Sum { get; set; }
     }
 }

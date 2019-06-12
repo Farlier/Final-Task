@@ -79,10 +79,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\Ninject.Web.Common.cs" />
+    <Compile Include="BusinessModels\PriceCalculator.cs" />
     <Compile Include="DataTransferObjects\CarDTO.cs" />
-    <Compile Include="DataTransferObjects\CarPropertiesDTO.cs" />
-    <Compile Include="DataTransferObjects\QualityClassDTO.cs" />
+    <Compile Include="DataTransferObjects\OrderDTO.cs" />
+    <Compile Include="Infrastructure\ServiceModule.cs" />
+    <Compile Include="Infrastructure\ValidationException.cs" />
+    <Compile Include="Interfaces\IOrderService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\OrderService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -94,5 +98,6 @@
       <Name>WebApplication.DAL</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
