@@ -9,7 +9,7 @@ namespace WebApplication.Controllers
     public class CarController : Controller
     {
         // GET: Car
-        public ActionResult Index()
+        public ActionResult CarList()
         {
             return View();
         }

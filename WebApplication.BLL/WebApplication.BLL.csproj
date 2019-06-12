@@ -79,11 +79,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\Ninject.Web.Common.cs" />
+    <Compile Include="DataTransferObjects\CarDTO.cs" />
+    <Compile Include="DataTransferObjects\CarPropertiesDTO.cs" />
+    <Compile Include="DataTransferObjects\QualityClassDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WebApplication.DAL\WebApplication.DAL.csproj">
+      <Project>{8dc43e63-eba7-45f0-ac26-b5c6daf2d14a}</Project>
+      <Name>WebApplication.DAL</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

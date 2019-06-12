@@ -1,4 +1,5 @@
 ﻿body {
+    background-color: #dcdde1;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -28,7 +29,7 @@ textarea {
     padding-top: 0.5rem;
     display: block;
     box-sizing: border-box;
-    background-color: #ecf0f1;
+    background-color: white;
     color: black;
 }
 
@@ -42,7 +43,7 @@ textarea {
 }
 
 .navbar-background {
-    background-color: #ecf0f1;
+    background-color: white;
 }
 
 

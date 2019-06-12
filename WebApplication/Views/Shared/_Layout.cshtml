@@ -23,7 +23,7 @@
                     <li>@Html.ActionLink("Home", "Index", "Home", new { @class = "disable-text-decoration nav-btn" })</li>
                     <li>@Html.ActionLink("About", "About", "Home", new { @class = "disable-text-decoration nav-btn" })</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home", new { @class = "disable-text-decoration nav-btn" })</li>
-                    <li>Cars</li>
+                    <li>@Html.ActionLink("Cars", "CarList", "Car", new { @class = "disable-text-decoration nav-btn" })</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -35,7 +35,8 @@
 
 
     </div>
-    <footer>
+    <footer class="container">
+        
         <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
     </footer>
     @Scripts.Render("~/bundles/jquery")
