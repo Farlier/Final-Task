@@ -6,12 +6,10 @@ using System.Threading.Tasks;
 
 namespace WebApplication.BLL.DataTransferObjects
 {
-    public class OrderDTO
+    public class QualityClassDTO
     {
         public int Id { get; set; }
-        public int UserId { get; set; }
-        public int CarId { get; set; }
-        public bool WithDriver { get; set; }
-        public string Status { get; set; }
+        public string Name { get; set; }
+        public decimal Price { get; set; }
     }
 }

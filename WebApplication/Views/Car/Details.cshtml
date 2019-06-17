@@ -1,0 +1,106 @@
+﻿@model WebApplication.BLL.DataTransferObjects.CarModelDTO
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CarViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Manufacturer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Manufacturer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Year)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Year)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PassengerCount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PassengerCount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DoorCount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DoorCount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AirConditioning)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AirConditioning)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GearBox)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GearBox)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QualityClass)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QualityClass)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SmallLuggageCount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SmallLuggageCount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LargeLuggageCount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LargeLuggageCount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Оформить заказ", "MakeOrder","Order",new { id = Model.Id }) |
+    @Html.ActionLink("Назад к списку", "CarList","Car")
+</p>

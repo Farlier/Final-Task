@@ -7,9 +7,11 @@ using WebApplication.BLL.DataTransferObjects;
 
 namespace WebApplication.BLL.Interfaces
 {
-    public interface IOrderService
+    public interface IQualityClassService
     {
-        void MakeOrder(OrderDTO orderDto);
+        QualityClassDTO GetQualityClass(int? id);
+        IEnumerable<QualityClassDTO> GetQualityClasses();
+        void CreateQualityClass(QualityClassDTO item);
         void Dispose();
     }
 }

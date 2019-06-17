@@ -12,7 +12,7 @@ namespace WebApplication.DAL.Repositories
 {
     public class CarRepository : IRepository<Car>
     {
-        private CarContext db;
+        private readonly CarContext db;
         public CarRepository(CarContext context)
         {
             db = context;

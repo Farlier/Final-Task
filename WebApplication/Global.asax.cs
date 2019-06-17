@@ -3,6 +3,7 @@ using Ninject.Modules;
 using Ninject.Web.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -22,8 +23,9 @@ namespace WebApplication
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
+
             NinjectModule orderModule = new OrderModule();
-            NinjectModule serviceModule = new ServiceModule("DefaultConnection");
+            NinjectModule serviceModule = new ServiceModule("RentalDb");
             var kernel = new StandardKernel(orderModule, serviceModule);
             DependencyResolver.SetResolver(new NinjectDependencyResolver(kernel));
         }

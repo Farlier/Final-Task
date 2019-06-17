@@ -53,7 +53,6 @@
     <Compile Include="Entities\Car.cs" />
     <Compile Include="Entities\CarModel.cs" />
     <Compile Include="Entities\Manufacturer.cs" />
-    <Compile Include="Entities\ModelProperties.cs" />
     <Compile Include="Entities\Order.cs" />
     <Compile Include="Entities\QualityClass.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
@@ -62,7 +61,6 @@
     <Compile Include="Repositories\CarModelRepository.cs" />
     <Compile Include="Repositories\CarRepository.cs" />
     <Compile Include="Repositories\ManufacturerRepository.cs" />
-    <Compile Include="Repositories\ModelPropertiesRepository.cs" />
     <Compile Include="Repositories\OrderRepository.cs" />
     <Compile Include="Repositories\QualityClassRepository.cs" />
     <Compile Include="Repositories\UnitOfWork.cs" />

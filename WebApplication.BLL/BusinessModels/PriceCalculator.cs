@@ -9,8 +9,8 @@ namespace WebApplication.BLL.BusinessModels
 {
     public class PriceCalculator
     {
-        Manufacturer manufacturer;
-        QualityClass qualityClass;
+        readonly Manufacturer manufacturer;
+        readonly QualityClass qualityClass;
 
         public PriceCalculator(Manufacturer mr, QualityClass qc)
         {

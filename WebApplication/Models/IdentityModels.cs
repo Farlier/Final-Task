@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -25,9 +26,44 @@ namespace WebApplication.Models
         {
         }
 
+        static ApplicationDbContext()
+        {
+            Database.SetInitializer(new DbContextInitializer());
+        }
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
+        }
+    }
+
+    public class DbContextInitializer : DropCreateDatabaseIfModelChanges<ApplicationDbContext>
+    {
+        protected override void Seed(ApplicationDbContext context)
+        {
+            var store = new RoleStore<IdentityRole>(context);
+            var manager = new RoleManager<IdentityRole>(store);
+
+            List<IdentityRole> identityRoles = new List<IdentityRole>();
+            identityRoles.Add(new IdentityRole { Name = "admin" });
+            identityRoles.Add(new IdentityRole { Name = "manager" });
+            identityRoles.Add(new IdentityRole { Name = "user" });
+
+            foreach(IdentityRole role in identityRoles)
+            {
+                manager.Create(role);
+            }
+
+            var userStore = new UserStore<ApplicationUser>(context);
+            var userManager = new UserManager<ApplicationUser>(userStore);
+            ApplicationUser admin = new ApplicationUser();
+            admin.Email = "aaa98394@gmail.com";
+            admin.UserName = admin.Email;
+
+            userManager.Create(admin, "newadmin");
+            userManager.AddToRole(admin.Id, "admin");
+
+            base.Seed(context);
         }
     }
 }

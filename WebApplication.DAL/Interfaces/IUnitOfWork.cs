@@ -11,7 +11,6 @@ namespace WebApplication.DAL.Interfaces
     {
         IRepository<Manufacturer> Manufacturers { get; }
         IRepository<CarModel> CarModels { get;  }
-        IRepository<ModelProperties> ModelProperties { get;  }
         IRepository<QualityClass> QualityClasses { get; }
         IRepository<Car> Cars { get;  }
         IRepository<Order> Orders { get;  }

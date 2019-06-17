@@ -11,11 +11,10 @@ namespace WebApplication.DAL.Repositories
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private CarContext db;
+        private readonly CarContext db;
         CarModelRepository carModelRepository;
         CarRepository carRepository;
         ManufacturerRepository manufacturerRepository;
-        ModelPropertiesRepository modelPropertiesRepository;
         OrderRepository orderRepository;
         QualityClassRepository qualityClassRepository;
 
@@ -48,15 +47,7 @@ namespace WebApplication.DAL.Repositories
                 return carModelRepository;
             }
         }
-        public IRepository<ModelProperties> ModelProperties
-        {
-            get
-            {
-                if (modelPropertiesRepository == null)
-                    modelPropertiesRepository = new ModelPropertiesRepository(db);
-                return modelPropertiesRepository;
-            }
-        }
+
         public IRepository<QualityClass> QualityClasses
         {
             get

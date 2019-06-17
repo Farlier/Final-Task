@@ -7,9 +7,11 @@ using WebApplication.BLL.DataTransferObjects;
 
 namespace WebApplication.BLL.Interfaces
 {
-    public interface IOrderService
+    public interface IManufacturerService
     {
-        void MakeOrder(OrderDTO orderDto);
+        ManufacturerDTO GetManufacturer(int? id);
+        IEnumerable<ManufacturerDTO> GetManufacturers();
+        void CreateManufacturer(ManufacturerDTO item);
         void Dispose();
     }
 }

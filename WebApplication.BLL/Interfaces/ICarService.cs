@@ -7,9 +7,12 @@ using WebApplication.BLL.DataTransferObjects;
 
 namespace WebApplication.BLL.Interfaces
 {
-    public interface IOrderService
+    public interface ICarService
     {
-        void MakeOrder(OrderDTO orderDto);
+        CarDTO GetCar(int? id);
+        IEnumerable<CarDTO> GetCars();
+        IEnumerable<CarDTO> GetAvaibleCars();
+        void CreateCar(CarDTO item);
         void Dispose();
     }
 }

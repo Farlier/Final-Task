@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebApplication.DAL.Entities;
 
-namespace WebApplication.DAL.Entities
+namespace WebApplication.BLL.DataTransferObjects
 {
-    public class CarModel
+    public class CarModelDTO
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -21,6 +22,6 @@ namespace WebApplication.DAL.Entities
         public QualityClass QualityClass { get; set; }
         public int SmallLuggageCount { get; set; }
         public int LargeLuggageCount { get; set; }
-
+        public decimal Price { get; set; }
     }
 }

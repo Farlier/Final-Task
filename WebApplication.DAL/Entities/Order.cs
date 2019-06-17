@@ -14,5 +14,18 @@ namespace WebApplication.DAL.Entities
         public Car Car { get; set; }
         public bool WithDriver { get; set; }
         public decimal Sum { get; set; }
+
+        public string Status
+        {
+            get
+            {
+                return Status;
+            }
+            set
+            {
+                if (value == "Оплачен" || value == "Ожидается оплата")
+                    Status = value;
+            }
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,51 +8,71 @@ using System.Web.Mvc;
 using WebApplication.BLL.DataTransferObjects;
 using WebApplication.BLL.Interfaces;
 using WebApplication.Models;
+using WebApplication.Models.ViewModels;
 
 namespace WebApplication.Controllers
 {
     public class CarController : Controller
     {
-        IOrderService orderService;
-        public CarController(IOrderService service)
+        readonly ICarService _carService;
+        readonly ICarModelService _carModelService;
+        public CarController(ICarService carService, ICarModelService carModelService)
         {
-            orderService = service;
+            _carService = carService;
+            _carModelService = carModelService;
         }
         // GET: Car
         public ActionResult CarList()
         {
-            IEnumerable<CarDTO> carsDTOs = orderService.GetCars();
-            var mapper = new MapperConfiguration(cg => cg.CreateMap<CarDTO, CarViewModel>()).CreateMapper();
-            var cars = mapper.Map<IEnumerable<CarDTO>, List<CarViewModel>>(carsDTOs);
-            return View(cars);
+            //var currentUserId = User.Identity.GetUserName();
+            IEnumerable<CarDTO> carsDTOs = _carService.GetCars();
+            List<CarModelDTO> modelDTOs = new List<CarModelDTO>();
+            foreach (var it in carsDTOs)
+            {
+                modelDTOs.Add(_carModelService.GetCarModel(it.CarModelId));
+            }
+
+            return View(modelDTOs);
         }
 
         // GET: Car/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var car = _carModelService.GetCarModel(id);
+            return View(car);
         }
-
         // GET: Car/Create
         public ActionResult Create()
         {
+            //ViewBag.Manufacturers = _carService.GetManufacturers().ToList();
+            //ViewBag.CarModels = _carService.GetCarModels().ToList();
+
             return View();
         }
 
         // POST: Car/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
+       
 
-                return RedirectToAction("Index");
-            }
-            catch
+      
+
+        public ActionResult CreateCar()
+        {
+            var ModelsNames = new List<string>();
+            foreach (var it in _carModelService.GetCarModels())
             {
-                return View();
+                ModelsNames.Add(it.Name);
             }
+            ViewBag.CarModel = ModelsNames;
+            return View(new CreateCarViewModel());
+        }
+
+        [HttpPost]
+        public ActionResult CreateCar(CreateCarViewModel item)
+        {
+            var model = _carModelService.GetCarModels().ToList().FirstOrDefault(it => it.Name == item.ModelName);
+            var carDto = new CarDTO { AvaibleNow = true, CarModelId = model.Id };
+            _carService.CreateCar(carDto);
+            return RedirectToAction("CreateCar");
         }
 
         // GET: Car/Edit/5
@@ -97,5 +118,7 @@ namespace WebApplication.Controllers
                 return View();
             }
         }
+
+
     }
 }

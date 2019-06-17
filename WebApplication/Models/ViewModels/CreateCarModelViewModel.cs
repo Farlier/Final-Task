@@ -1,26 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
-namespace WebApplication.DAL.Entities
+namespace WebApplication.Models.ViewModels
 {
-    public class CarModel
+    public class CreateCarModelViewModel
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public int Year { get; set; }
-        public int ManufacturerId { get; set; }
-        public Manufacturer Manufacturer { get; set; }
+        public string ManufacturerName { get; set; }
         public int PassengerCount { get; set; }
         public int DoorCount { get; set; }
         public bool AirConditioning { get; set; }
         public string GearBox { get; set; }
-        public int QualityClassId { get; set; }
-        public QualityClass QualityClass { get; set; }
+        public string QualityClassName { get; set; }
         public int SmallLuggageCount { get; set; }
         public int LargeLuggageCount { get; set; }
-
     }
 }
