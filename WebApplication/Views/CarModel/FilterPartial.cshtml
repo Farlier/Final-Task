@@ -1,0 +1,30 @@
+﻿@model WebApplication.Models.FilterModels.FilterViewModel
+
+
+<h4>Выборка по марке</h4>
+@foreach (var it in Model.manufacturerFilters)
+{
+    <span style="margin-right:3px; margin-bottom:5px;">
+        <a class="btn btn-primary" href="@Url.Action("SelectionResult","Car",new { manufacturer = it.ManufacturerName})">
+            @it.ManufacturerName
+        </a>
+    </span>
+}
+
+<div></div>
+<h4>Выборка по класу качества</h4>
+@foreach (var it in Model.qualityClassFilters)
+{
+    <span>
+        <a class="btn btn-primary" style="margin-right:3px; margin-bottom:5px;" href="@Url.Action("SelectionResult","Car",new { qualityClass = it.QualityClassName })">
+            @it.QualityClassName
+        </a>
+    </span>
+}
+
+<div class="row">
+    <div class="col">
+
+    </div>
+</div>
+

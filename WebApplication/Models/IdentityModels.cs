@@ -37,7 +37,7 @@ namespace WebApplication.Models
         }
     }
 
-    public class DbContextInitializer : DropCreateDatabaseIfModelChanges<ApplicationDbContext>
+    public class DbContextInitializer : CreateDatabaseIfNotExists<ApplicationDbContext>
     {
         protected override void Seed(ApplicationDbContext context)
         {

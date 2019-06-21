@@ -12,6 +12,7 @@ namespace WebApplication.BLL.Interfaces
         ManufacturerDTO GetManufacturer(int? id);
         IEnumerable<ManufacturerDTO> GetManufacturers();
         void CreateManufacturer(ManufacturerDTO item);
+        void DeleteManufacturer(ManufacturerDTO item);
         void Dispose();
     }
 }

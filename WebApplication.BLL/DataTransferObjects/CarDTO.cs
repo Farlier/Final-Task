@@ -9,7 +9,7 @@ namespace WebApplication.BLL.DataTransferObjects
     public class CarDTO
     {
         public int Id { get; set; }
-        public bool AvaibleNow { get; set; }
         public int CarModelId { get; set; }
+        public int RentalCenterId { get; set; }
     }
 }

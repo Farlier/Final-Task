@@ -12,6 +12,8 @@ namespace WebApplication.BLL.Interfaces
         CarModelDTO GetCarModel(int? id);
         IEnumerable<CarModelDTO> GetCarModels();
         void CreateCarModel(CarModelDTO item);
+        void DelteCarModel(CarModelDTO item);
+        void DeletCarModels(IEnumerable<CarModelDTO> items);
         void Dispose();
     }
 }

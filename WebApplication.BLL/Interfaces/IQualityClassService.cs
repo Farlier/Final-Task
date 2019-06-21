@@ -12,6 +12,7 @@ namespace WebApplication.BLL.Interfaces
         QualityClassDTO GetQualityClass(int? id);
         IEnumerable<QualityClassDTO> GetQualityClasses();
         void CreateQualityClass(QualityClassDTO item);
+        void DeleteQualityClass(QualityClassDTO item);
         void Dispose();
     }
 }

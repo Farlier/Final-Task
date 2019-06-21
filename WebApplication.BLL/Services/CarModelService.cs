@@ -35,6 +35,8 @@ namespace WebApplication.BLL.Services
 
             var mapper = new MapperConfiguration(cg => cg.CreateMap<CarModel, CarModelDTO>()).CreateMapper();
             var modelDto = mapper.Map<CarModel, CarModelDTO>(model);
+            modelDto.Manufacturer = Db.Manufacturers.Get(modelDto.ManufacturerId);
+            modelDto.QualityClass = Db.QualityClasses.Get(modelDto.QualityClassId);
 
             return modelDto;
         }
@@ -46,6 +48,8 @@ namespace WebApplication.BLL.Services
             var modelsDto = mapper.Map<IEnumerable<CarModel>, List<CarModelDTO>>(models);
             for (int i = 0; i < modelsDto.Count; i++)
             {
+                modelsDto[i].Manufacturer = Db.Manufacturers.Get(modelsDto[i].ManufacturerId);
+                modelsDto[i].QualityClass = Db.QualityClasses.Get(modelsDto[i].QualityClassId);
                 modelsDto[i].Price = Db.Manufacturers.Get(modelsDto[i].ManufacturerId).Price +
                     Db.QualityClasses.Get(modelsDto[i].QualityClassId).Price;
             }
@@ -58,6 +62,19 @@ namespace WebApplication.BLL.Services
             var mapper = new MapperConfiguration(cg => cg.CreateMap<CarModelDTO, CarModel>()).CreateMapper();
             var model = mapper.Map<CarModelDTO, CarModel>(item);
             Db.CarModels.Create(model);
+            Db.Save();
+        }
+
+        public void DelteCarModel(CarModelDTO item)
+        {
+            Db.CarModels.Delete(item.Id);
+            Db.Save();
+        }
+
+        public void DeletCarModels(IEnumerable<CarModelDTO> items)
+        {
+            foreach (var it in items)
+                Db.CarModels.Delete(it.Id);
             Db.Save();
         }
     }

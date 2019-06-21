@@ -15,6 +15,9 @@ namespace WebApplication.DAL.EFContexts
         public IDbSet<QualityClass> QualityClasses { get; set; }
         public IDbSet<Car> Cars { get; set; }
         public IDbSet<Order> Orders { get; set; }
+        public IDbSet<RentalCenter> RentalCenters { get; set; }
+        public IDbSet<CarInUse> CarsInUse { get; set; }
+        public IDbSet<ServiceEntity> ServiceEntities { get; set; }
 
         static CarContext()
         {

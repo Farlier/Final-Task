@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
@@ -9,6 +10,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using WebApplication.Models;
+using WebApplication.Models.UserVieModels;
 
 namespace WebApplication.Controllers
 {
@@ -22,7 +24,7 @@ namespace WebApplication.Controllers
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -34,9 +36,9 @@ namespace WebApplication.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -91,6 +93,69 @@ namespace WebApplication.Controllers
             }
         }
 
+        [HttpGet]
+        [Authorize(Roles = "admin")]
+        public ActionResult GetAllUsers()
+        {
+            var allUsers = UserManager.Users.ToList();
+
+            var mapper = new AutoMapper.MapperConfiguration(cg => cg.CreateMap<ApplicationUser, UsersViewModel>()).CreateMapper();
+            var allUsersView = mapper.Map<List<ApplicationUser>, List<UsersViewModel>>(allUsers);
+
+            for (int i = 0; i < allUsers.Count; i++)
+            {
+                var temp = UserManager.GetRoles(allUsers[i].Id).ToList();
+                allUsersView[i].UserRoles = UserManager.GetRoles(allUsers[i].Id).ToList();
+            }
+
+            return View(allUsersView);
+        }
+
+
+
+        [HttpPost]
+        [Authorize(Roles = "admin")]
+        public ActionResult AddManager(string userId)
+        {
+            UserManager.RemoveFromRole(userId, "user");
+            UserManager.AddToRole(userId, "manager");
+            UserManager.Update(UserManager.FindById(userId));
+            return RedirectToAction("GetAllUsers");
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "admin")]
+        public ActionResult DeleteManager(string userId)
+        {
+            UserManager.RemoveFromRole(userId, "manager");
+            UserManager.AddToRole(userId, "user");
+            UserManager.Update(UserManager.FindById(userId));
+            return RedirectToAction("GetAllUsers");
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "admin")]
+        public ActionResult BlockUser(string userId)
+        {
+            var lockoutEndDate = new DateTime(2999, 01, 01);
+            UserManager.SetLockoutEnabled(userId, true);
+            UserManager.SetLockoutEndDate(userId, lockoutEndDate);
+            UserManager.Update(UserManager.FindById(userId));
+            return RedirectToAction("GetAllUsers");
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "admin")]
+        public ActionResult UnBlockUser(string userId)
+        {
+            UserManager.SetLockoutEnabled(userId, false);
+            UserManager.Update(UserManager.FindById(userId));
+
+            return RedirectToAction("GetAllUsers");
+        }
+
+
+
         //
         // GET: /Account/VerifyCode
         [AllowAnonymous]
@@ -120,7 +185,7 @@ namespace WebApplication.Controllers
             // If a user enters incorrect codes for a specified amount of time then the user account 
             // will be locked out for a specified amount of time. 
             // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -155,8 +220,8 @@ namespace WebApplication.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    await UserManager.AddToRoleAsync(user.Id, "user");
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);

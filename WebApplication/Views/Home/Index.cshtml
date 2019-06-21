@@ -1,139 +1,48 @@
-﻿@{
-    ViewBag.Title = "Home Page";
-}
-<div class="baner">
-    <h1 class="text-center" style="padding-top:100px; padding-bottom:50px;">Арендуй авто за пару минут!</h1>
-</div>
-<div class="slider">
-    <div class="slide-list">
-        <div class="slide-wrap">
-            <p class="text-center">Class name</p>
-            <div class="slide-item">
-                <img src="~/Content/TestImages/532896-724-280x210.jpg" alt="" />
-                <p class="text-center">simillar</p>
-                <table>
-                    <tr>
-                        <td style="padding-right:10px;">
-                            <img src="~/Content/Icons/Seats.png" />
-                            Места
-                        </td>
-                        <td>
-                            <img src="~/Content/Icons/Doors.png" />
-                            Дверей
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <img src="~/Content/Icons/Gearbox.png" />
-                        </td>
-                        <td>
-                            <img src="~/Content/Icons/Luggage.png" />
-                        </td>
-                    </tr>
+﻿@model IEnumerable<WebApplication.Models.QualityClassViewModel>
+<div class="baner row">
+    <h1 class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center" style="padding-top:100px; padding-bottom:50px;">Арендуй авто за пару минут!</h1>
+    @*<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center "
 
-                </table>
+        @using (Html.BeginForm("GetConfig", "Car" ,FormMethod.Post,new { @class = "text-center row justify-content-center" }))
+        {
+
+            <div class="form-group" style="margin-right:20px">
+                <label class="control-label "> Город </label>
+                <input id="searchcity "class="form-control" type="text" name="City" />
             </div>
-            <div class="slide-item text-center">
-                <img src="~/Content/TestImages/532896-724-280x210.jpg" alt="" />
-                <p class="text-center">simillar</p>
-                <table >
-                    <tr>
-                        <td style="padding-right:10px;" class="text-center">
-                            <img src="~/Content/Icons/Seats.png" />
-                            Места
-                        </td>
-                        <td>
-                            <img src="~/Content/Icons/Doors.png" />
-                            Дверей
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <img src="~/Content/Icons/Gearbox.png" />
-                        </td>
-                        <td>
-                            <img src="~/Content/Icons/Luggage.png" />
-                        </td>
-                    </tr>
 
-                </table>
+            @*<div class="form-group" style="margin-right:20px">
+                <label class="control-label "> Начало проката </label>
+                <input class="form-control" type="date" name="DateStart" />
             </div>
-            <div class="slide-item">
-                <img src="~/Content/TestImages/532896-724-280x210.jpg" alt="" />
-                <p class="text-center">simillar</p>
-                <table>
-                    <tr>
-                        <td style="padding-right:10px;">
-                            <img src="~/Content/Icons/Seats.png" />
-                            Места
-                        </td>
-                        <td>
-                            <img src="~/Content/Icons/Doors.png" />
-                            Дверей
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <img src="~/Content/Icons/Gearbox.png" />
-                        </td>
-                        <td>
-                            <img src="~/Content/Icons/Luggage.png" />
-                        </td>
-                    </tr>
 
-                </table>
+            <div class="form-group" style="margin-right:20px">
+                <label class="control-label"> Конец проката </label>
+                <input class="form-control" type="date" name="DateEnd" />
             </div>
-        </div>
-        <div class="clear-fl"></div>
-    </div>
-    <div name="next-slide" class="nav-elem next-slide"></div>
-    <div name="prev-slide" class="nav-elem prev-slide"></div>
-</div>
 
-<script type="text/javascript">
-    jQuery(document).ready(function () {
-        function htmSlider() {
-            /* Зададим следующие параметры */
-            /* обертка слайдера */
-            var slideWrap = jQuery('.slide-wrap');
-            /* кнопки вперед/назад и старт/пауза */
-            var nextLink = jQuery('.next-slide');
-            var prevLink = jQuery('.prev-slide');
-            /* Проверка на анимацию */
-            var is_animate = false;
-            /* ширина слайда с отступами */
-            var slideWidth = jQuery('.slide-item').outerWidth();
-            /* смещение слайдера */
-            var scrollSlider = slideWrap.position().left - slideWidth;
-
-            /* Клик по ссылке на следующий слайд */
-            nextLink.click(function () {
-                if (!slideWrap.is(':animated')) {
-                    slideWrap.animate({ left: scrollSlider }, 500, function () {
-                        slideWrap
-                            .find('.slide-item:first')
-                            .appendTo(slideWrap)
-                            .parent()
-                            .css({ 'left': 0 });
-                    });
-                }
-            });
-
-            /* Клик по ссылке на предыдующий слайд */
-            prevLink.click(function () {
-                if (!slideWrap.is(':animated')) {
-                    slideWrap
-                        .css({ 'left': scrollSlider })
-                        .find('.slide-item:last')
-                        .prependTo(slideWrap)
-                        .parent()
-                        .animate({ left: 0 }, 500);
-                }
-            });
-
+            <div class="w-100" style="padding-bottom:20px;"></div>
+            <input class="btn btn-primary" style="margin:auto;" type="submit" value="Отправить" />
         }
+    </div>
+        *@
+</div>
+<div class="row justify-content-center" style="margin-top:20px;">
+    @foreach (var it in Model)
+    {
+        <a class="col-10 col-sm-4 col-md-3 col-lg-3 col-xl-3 car my-no-gutters text-decoration-none" 
+           style="background-color:lightgray; margin:15px; color:black"  
+            href="@Url.Action("SelectionResult","CarModel",new { qualityClass = it.Name })">
 
-        /* иницилизируем функцию слайдера */
-        htmSlider();
-    });
-</script>
+            <div class=" my-no-gutters " >
+                <div class="text-center" style="width:100%; background-color:gray; color:orange">
+                    Класс @it.Name
+                </div>
+                <div class="image" style="background-image:url(@it.Photo);"></div>
+                <p class="text-center">
+                    @it.Description
+                </p>
+            </div>
+        </a>
+    }
+</div>

@@ -55,5 +55,11 @@ namespace WebApplication.BLL.Services
             Db.Manufacturers.Create(mr);
             Db.Save();
         }
+
+        public void DeleteManufacturer(ManufacturerDTO item)
+        {
+            Db.Manufacturers.Delete(item.Id);
+            Db.Save();
+        }
     }
 }

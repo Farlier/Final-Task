@@ -13,6 +13,8 @@ namespace WebApplication.BLL.Interfaces
         IEnumerable<CarDTO> GetCars();
         IEnumerable<CarDTO> GetAvaibleCars();
         void CreateCar(CarDTO item);
+        void DeleteCar(CarDTO item);
+        void DeleteCars(IEnumerable<CarDTO> item);
         void Dispose();
     }
 }

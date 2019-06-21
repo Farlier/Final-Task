@@ -15,17 +15,22 @@
     </div>
     <div class="navbar navbar-light navbar-expand-lg navbar-fixed-top navbar-padding">
         <div class="container navbar-background my-no-gutters">
-            @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand", style = "margin-left:15px;" })
+            @Html.ActionLink("Аренда авто", "Index", "Home", new { area = "" }, new { @class = "navbar-brand", style = "margin-left:15px;" })
             <button type="button" class="navbar-toggler " data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="navbar-toggler-icon"></span>
 
             </button>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav mr-auto">
-                    <li>@Html.ActionLink("Home", "Index", "Home", null, new { @class = "disable-text-decoration nav-btn" })</li>
-                    <li>@Html.ActionLink("About", "About", "Home", null, new { @class = "disable-text-decoration nav-btn" })</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "disable-text-decoration nav-btn" })</li>
-                    <li>@Html.ActionLink("Cars", "CarList", "Car", null, new { @class = "disable-text-decoration nav-btn" })</li>
+                    <li>@Html.ActionLink("Главная", "Index", "Home", null, new { @class = "disable-text-decoration nav-btn" })</li>
+                    @*<li>@Html.ActionLink("О Нас", "About", "Home", null, new { @class = "disable-text-decoration nav-btn" })</li>
+                    <li>@Html.ActionLink("Контакты", "Contact", "Home", null, new { @class = "disable-text-decoration nav-btn" })</li>*@
+                    <li>@Html.ActionLink("Автомобили", "CarModelList", "CarModel", null, new { @class = "disable-text-decoration nav-btn" })</li>
+                    @if (ViewContext.HttpContext.User.IsInRole("admin"))
+                    {
+                        <li>@Html.ActionLink("Редактировать", "Create", "Home", null, new { @class = "disable-text-decoration nav-btn" })</li>
+                    }
+
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

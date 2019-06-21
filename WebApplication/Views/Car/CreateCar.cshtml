@@ -1,36 +1,36 @@
 ﻿@model WebApplication.Models.ViewModels.CreateCarViewModel
 
 @{
-    ViewBag.Title = "CreateCar";
+    ViewBag.Title = "Добавить модель авто";
 }
 
-<h2>CreateCar</h2>
+<h2>@ViewBag.Title.ToString()</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>CreateCarViewModel</h4>
+
+    <div>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
         <div class="form-group">
             @Html.LabelFor(model => model.ModelName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.ModelName, new SelectList(ViewBag.CarModel), "Выберите модель авто", new { @class = "form-control" })
-               @* @Html.EditorFor(model => model.ModelName, new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.DropDownListFor(m => m.ModelName, new SelectList(Model.ValidModels), "Выберите модель авто", new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.ModelName, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input class = "btn btn-primary" type="submit" value="Добавить"  />
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+<div class="text-center">
+    @Html.ActionLink("В меню", "Create", "Home", null, new { @class = "btn btn-secondary" })
 </div>
+

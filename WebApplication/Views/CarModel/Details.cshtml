@@ -1,0 +1,82 @@
+﻿@model WebApplication.Models.ViewModels.CarModelView
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+
+<div class="row">
+    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-8">
+        <div class="image" style="background-image:url(@Model.Photo);">
+
+        </div>
+    </div>
+    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+        @Html.DisplayFor(modelItem => Model.Manufacturer.Name)
+        @Html.DisplayFor(modelItem => Model.Name)
+        <p></p>
+        <table>
+            <tr>
+                <td style="padding-right:10px;">
+                    <img src="~/Content/Icons/Seats.png" />
+                    @Html.DisplayFor(modelItem => Model.PassengerCount) Места
+                </td>
+                <td>
+                    <img src="~/Content/Icons/Doors.png" />
+                    @Html.DisplayFor(modelItem => Model.DoorCount) Дверей
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <img src="~/Content/Icons/Air conditioning.png" />
+                    @if (Model.AirConditioning == true)
+                    {
+                        <text>Да</text>
+                    }
+
+                    else
+                    {
+                        <text>"Нет"</text>
+                    }
+                </td>
+                <td>
+                    <img src="~/Content/Icons/Gearbox.png" />
+                    @Html.DisplayFor(modelItem => Model.GearBox)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <img src="~/Content/Icons/Luggage.png" />
+                    @Html.DisplayFor(modelItem => Model.LargeLuggageCount)
+                </td>
+                <td>
+                    <img src="~/Content/Icons/Luggage small.png" />
+                    @Html.DisplayFor(modelItem => Model.SmallLuggageCount)
+                </td>
+            </tr>
+        </table>
+
+        <p style="margin:0;"></p>
+        @Html.DisplayNameFor(model => model.QualityClass):
+        @Html.DisplayFor(modelItem => Model.QualityClass.Name)
+        <p style="margin:0;"></p>
+        @Html.DisplayNameFor(model => model.Price):
+        @Html.DisplayFor(modelItem => Model.Price)
+        <p style="margin:0;"></p>
+        @Html.DisplayNameFor(model => model.Count):
+        @Html.DisplayFor(modelItem => Model.Count)
+    </div>
+    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12 offset-sm-8 offset-md-0">
+
+
+        @Html.ActionLink("Редактировать", "Edit", "CarModel", new { id = Model.Id }, new { @class = "btn btn-warning btn-block", @style = "margin-left:5px;" })
+        @Html.ActionLink("Удалить", "Delete", "CarModel", new { id = Model.Id }, new { @class = "btn btn-danger btn-block", @style = "margin-left:5px;" })
+    </div>
+    <div class="w-100 " style="padding-bottom:20px;"></div>
+
+</div>
+<div class="text-center">
+    @Html.ActionLink("Назад к списку", "CarModelList", null, new { @class = "btn btn-secondary" })
+</div>

@@ -45,7 +45,16 @@ namespace WebApplication.BLL.Services
 
         public void CreateQualityClass(QualityClassDTO item)
         {
-            throw new NotImplementedException();
+            var mapper = new MapperConfiguration(cg => cg.CreateMap<QualityClassDTO, QualityClass>()).CreateMapper();
+            var newItem = mapper.Map<QualityClassDTO, QualityClass>(item);
+            Db.QualityClasses.Create(newItem);
+            Db.Save();
+        }
+
+        public void DeleteQualityClass(QualityClassDTO item)
+        {
+            Db.QualityClasses.Delete(item.Id);
+            Db.Save();
         }
     }
 }

@@ -61,84 +61,84 @@ textarea {
     padding-left: 0;
 }
 
-.car-picture{
-    position:relative;
-    width:20%;
-    max-height:auto;
+.car-picture {
+    position: relative;
+    width: 100%;
+    max-height: auto;
 }
 
-.car-picture:after{
-    content:"";
-    display:block;
-    padding-bottom:100%;
-}
+    .car-picture:after {
+        content: "";
+        display: block;
+        padding-bottom: 100%;
+    }
 
-.content{
-    position:absolute;
-    width:100%;
+.content {
+    position: absolute;
+    width: 100%;
     /*height:100%;*/
 }
 
 /*Gorizontal slider*/
 
-.clear-fl{
-    margin-top:-1px;
-    height:1px;
-    clear:both;
-    zoom:1;
+.clear-fl {
+    margin-top: -1px;
+    height: 1px;
+    clear: both;
+    zoom: 1;
 }
 
-.slider{
-    width:100%;
-    margin:50px auto;
-    padding:0 30px;
+.slider {
+    width: 100%;
+    margin: 50px auto;
+    padding: 0 30px;
     position: relative;
 }
 
-.slider::-moz-selection {
-    background:transparent;
-    color:#fff;
-    text-shadow:none;
+    .slider::-moz-selection {
+        background: transparent;
+        color: #fff;
+        text-shadow: none;
+    }
+
+    .slider ::selection {
+        background: transparent;
+        color: #fff;
+        text-shadow: none;
+    }
+
+.slide-list {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
 }
 
-.slider ::selection{
-    background:transparent;
-    color:#fff;
-    text-shadow:none;
-}
-
-.slide-list{
-    position:relative;
-    margin:0;
-    padding:0;
-    overflow:hidden;
-}
-
-.slide-wrap{
-    position:relative;
+.slide-wrap {
+    position: relative;
     left: 0px;
-    top:0;
-    width:1000%;
+    top: 0;
+    width: 1000%;
 }
 
-.slide-item{
-    width:280px;
-    padding:10px;
-    float:left;
+.slide-item {
+    width: 280px;
+    float: left;
+    margin-right: 100px;
 }
 
-.nav-elem{
-    position:absolute;
-    top:0;
-    z-index:1;
-    height:100%;
-    width:30px;
-    cursor:pointer;
+.nav-elem {
+    position: absolute;
+    top: 0;
+    z-index: 1;
+    height: 100%;
+    width: 30px;
+    cursor: pointer;
 }
 
-.prev-slide{
-    left:0;
-    background:#dbdbdb url(Icons/Luggage.png) 11px 40% no-repeat;
+.prev-slide {
+    left: 0;
+    background: #dbdbdb url(Icons/Luggage.png) 11px 40% no-repeat;
 }
 
 .next-slide {
@@ -146,12 +146,102 @@ textarea {
     background: #dbdbdb url(Icons/Luggage.png) 11px 40% no-repeat;
 }
 
-.image{
-    width:100%;
+.image {
+    width: 100%;
 }
 
-.baner{
-    width:100%;
+.baner {
+    width: 100%;
     background-image: url(Baner/Baner.png);
-    min-height: 475px;
+    min-height: 500px;
+    margin: auto;
+    padding-bottom: 20px;
+}
+
+.image {
+    width: 100%;
+    min-height: 240px;
+    background: no-repeat;
+    background-size: contain;
+    background-position: center;
+    background-color: white;
+}
+
+
+.car {
+}
+
+    .car:hover {
+        transition: all .2s ease-in-out;
+        transform: scale(1.1);
+    }
+
+.my-input {
+    display: none;
+}
+
+/*.checkbox input {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+    margin: 10px 0 0 20px;
+}
+
+.checkbox__text {
+    position: relative;
+    padding: 0 0 0 60px;
+    cursor: pointer;
+}
+
+    .checkbox__text:before {
+        content: '';
+        position: absolute;
+        top: -4px;
+        left: 0;
+        width: 50px;
+        height: 26px;
+        border-radius: 13px;
+        background: #CDD1DA;
+        box-shadow: inset 0 2px 3px rgba(0,0,0,.2);
+        transition: .2s;
+    }
+
+    .checkbox__text:after {
+        content: '';
+        position: absolute;
+        top: -2px;
+        left: 2px;
+        width: 22px;
+        height: 22px;
+        border-radius: 10px;
+        background: #FFF;
+        box-shadow: 0 2px 5px rgba(0,0,0,.3);
+        transition: .2s;
+    }
+
+.checkbox input:checked + .checkbox__text:before {
+    background: #9FD468;
+}
+
+.checkbox input:checked + .checkbox__text:after {
+    left: 26px;
+}
+
+.checkbox input:focus + .checkbox__text:before {
+    box-shadow: inset 0 2px 3px rgba(0,0,0,.2), 0 0 0 3px rgba(255,255,0,.7);
+}*/
+
+/*<label class="checkbox" >
+<input type="checkbox" / >
+<div class="checkbox__text" > Я переключаю чекбокс</div >
+</label >*/
+
+.filter-section{
+    margin-top:10px;
+    margin-bottom:10px;
+}
+
+.margin-hor {
+    margin-left: 0;
+    margin-right: 0;
 }

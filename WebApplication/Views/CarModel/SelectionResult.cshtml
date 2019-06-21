@@ -1,0 +1,92 @@
+﻿@model IEnumerable<WebApplication.Models.ViewModels.CarModelView>
+
+@{
+    ViewBag.Title = "SelectionResult";
+}
+
+<section class=" row justify-content-center margin-hor">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.ActionLink("model", "SelectionResult", new { sortOrder = ViewBag.NameSortParm, manufacturer = ViewBag.Manufacturer, qualityClass = ViewBag.QualityClass })
+            </th>
+            <th>
+                @Html.ActionLink("price", "SelectionResult", new { sortOrder = ViewBag.PriceSortParam, manufacturer = ViewBag.Manufacturer, qualityClass = ViewBag.QualityClass })
+            </th>
+            <th></th>
+        </tr>
+    </table>
+    @foreach (var item in Model)
+    {
+        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-8">
+            <div class="image" style="background-image:url(@item.Photo);">
+            </div>
+        </div>
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+            @Html.DisplayFor(modelItem => item.Manufacturer.Name)
+            @Html.DisplayFor(modelItem => item.Name)
+            <p></p>
+            <table>
+                <tr>
+                    <td style="padding-right:10px;">
+                        <img src="~/Content/Icons/Seats.png" />
+                        @Html.DisplayFor(modelItem => item.PassengerCount) Места
+                    </td>
+                    <td>
+                        <img src="~/Content/Icons/Doors.png" />
+                        @Html.DisplayFor(modelItem => item.DoorCount) Дверей
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <img src="~/Content/Icons/Air conditioning.png" />
+                        @if (item.AirConditioning == true)
+                        {
+                            <text>Да</text>
+                        }
+
+                        else
+                        {
+                            <text>"Нет"</text>
+                        }
+                    </td>
+                    <td>
+                        <img src="~/Content/Icons/Gearbox.png" />
+                        @Html.DisplayFor(modelItem => item.GearBox)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <img src="~/Content/Icons/Luggage.png" />
+                        @Html.DisplayFor(modelItem => item.LargeLuggageCount)
+                    </td>
+                    <td>
+                        <img src="~/Content/Icons/Luggage small.png" />
+                        @Html.DisplayFor(modelItem => item.SmallLuggageCount)
+                    </td>
+                </tr>
+            </table>
+
+            <p style="margin:0;"></p>
+            @Html.DisplayNameFor(model => model.QualityClass):
+            @Html.DisplayFor(modelItem => item.QualityClass.Name)
+        </div>
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12 offset-sm-8 offset-md-0">
+            @Html.DisplayNameFor(model => model.Price):
+            @Html.DisplayFor(modelItem => item.Price)
+             if (item.Count > 0)
+                {
+                    @Html.ActionLink("Подробнее", "Details", "Car", new { id = item.Id }, new { @class = "btn btn-primary", @style = "margin-left:5px;" })
+                }
+                else
+                {
+                    @Html.ActionLink("Подробнее", "Details", "Car", new { id = item.Id }, new { @class = "btn btn-primary disabled", @style = "margin-left:5px;" })
+                }
+        </div>
+        <div class="w-100" style="padding-bottom:20px;"></div>
+    }
+    @*@if (Roles.IsUserInRole("admin"))
+        {
+            @Html.ActionLink("Add New", "Create", "Car")
+        }*@
+</section>

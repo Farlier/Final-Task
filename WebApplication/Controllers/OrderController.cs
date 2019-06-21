@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,16 +8,21 @@ using System.Web.Mvc;
 using WebApplication.BLL.DataTransferObjects;
 using WebApplication.BLL.Interfaces;
 using WebApplication.Models;
+using WebApplication.Models.ViewModels;
 
 namespace WebApplication.Controllers
 {
     public class OrderController : Controller
     {
         IOrderService _orderService;
+        ICarService _carService;
+        ICarModelService _carModelService;
 
-        public OrderController(IOrderService orderService)
+        public OrderController(IOrderService orderService, ICarService carService, ICarModelService carModelService)
         {
             _orderService = orderService;
+            _carService = carService;
+            _carModelService = carModelService;
         }
         // GET: Order
         public ActionResult Index()
@@ -24,26 +30,37 @@ namespace WebApplication.Controllers
             return View();
         }
         [HttpGet]
-        public ActionResult MakeOrder()
+        public ActionResult Rent(int id)
         {
-            return View(new OrderViewModel());
+            return View(new OrderView { ModelId = id });
         }
 
         [HttpPost]
-        public ActionResult FinalizeOrder(OrderViewModel newOrder)
+        public ActionResult Rent(OrderView order)
         {
-            var mapper = new MapperConfiguration(cg => cg.CreateMap<OrderViewModel, OrderDTO > ()).CreateMapper();
-            var orderDto = mapper.Map<OrderViewModel, OrderDTO> (newOrder);
-            _orderService.MakeOrder(orderDto);
+            OrderDTO newOrder = new OrderDTO();
+            //TotalSumView totalSumView = new TotalSumView
+            //{
+                
+            //}
+
+            newOrder.CarId = _carService.GetAvaibleCars().FirstOrDefault(it => it.CarModelId == order.ModelId).Id;
+            newOrder.DayCount = order.DayCount;
+            newOrder.UserId=User.Identity.GetUserId();
+            newOrder.WithDriver = order.NeedDriver;
+
+            _orderService.MakeOrder(newOrder);
+
             return View();
         }
+
 
         public ActionResult ViewOrders()
         {
             return View();
         }
 
-        public ActionResult ViewOrders(int id)
+        public ActionResult ViewOrder(int id)
         {
             return View();
         }

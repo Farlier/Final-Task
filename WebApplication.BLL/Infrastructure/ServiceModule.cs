@@ -26,6 +26,7 @@ namespace WebApplication.BLL.Infrastructure
             Bind<ICarModelService>().To<CarModelService>().WithConstructorArgument(conectionString);
             Bind<IManufacturerService>().To<ManufacturerService>().WithConstructorArgument(conectionString);
             Bind<IQualityClassService>().To<QualityClassService>().WithConstructorArgument(conectionString);
+            Bind<IRentalCenterService>().To<RentalCenterService>().WithConstructorArgument(conectionString);
         }
     }
 }

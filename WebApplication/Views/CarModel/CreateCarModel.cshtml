@@ -1,0 +1,152 @@
+﻿@model WebApplication.Models.ViewModels.CreateCarModelViewModel
+
+@{
+    ViewBag.Title = "Добавить модель авто";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("CreateCarModel", "CarModel", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <div class="form-group">
+            <div class="col-md-10 ">
+                @Html.Label("Фото авто")
+                <label class="btn btn-primary">
+                    Выберите файл
+                    <input class="my-input" id="fileUpload" type="file" name="upload" accept=".jpg,.jpeg,.png" />
+                </label>
+                
+            </div>
+            <div id="image-holder" style="margin-left:15px;"></div>
+        </div>
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ManufacturerName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.ManufacturerName, new SelectList(Model.ManufacturersView), "Выберите производителя", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ManufacturerName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PassengerCount, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PassengerCount, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PassengerCount, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DoorCount, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DoorCount, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DoorCount, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AirConditioning, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.AirConditioning)
+                    @Html.ValidationMessageFor(model => model.AirConditioning, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.GearBox, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.GearBox, new SelectList(Model.GearBoxType), "Выберите тип коробки передач", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.GearBox, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.QualityClassName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.QualityClassName, new SelectList(Model.QualityClassesView), "Выберите класс качества", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.QualityClassName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SmallLuggageCount, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SmallLuggageCount, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SmallLuggageCount, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LargeLuggageCount, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.LargeLuggageCount, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.LargeLuggageCount, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input class="btn btn-primary" type="submit" value="Create" />
+            </div>
+        </div>
+    </div>
+}
+
+<div class="text-center">
+    @Html.ActionLink("В меню", "Create", "Home", null, new { @class = "btn btn-secondary" })
+</div>
+
+<script>
+    $("#fileUpload").on('change', function () {
+
+        if (typeof (FileReader) != "undefined") {
+
+            var image_holder = $("#image-holder");
+            image_holder.empty();
+
+            var reader = new FileReader();
+            reader.onload = function (e) {
+
+                var image = new Image();
+                image.src = e.target.result;
+
+                image.onload = function () {
+                    var height = this.height;
+                    var width = this.width;
+                    if (height > 240 || width > 320) {
+                        alert("Uploaded image has invalid Height and Width.");
+                        document.getElementById('fileUpload').value = "";
+                        return true;
+                    }
+                    else {
+
+                        $("<img />", {
+                            "src": e.target.result,
+                            "class": "thumb-image"
+                        }).appendTo(image_holder);
+                        image_holder.show();
+                        return false;
+                    }
+                };
+            }
+            reader.readAsDataURL($(this)[0].files[0]);
+        } else {
+            alert("This browser does not support FileReader.");
+        }
+    });
+</script>
+

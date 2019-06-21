@@ -11,7 +11,6 @@ namespace WebApplication.BLL.DataTransferObjects
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public int Year { get; set; }
         public int ManufacturerId { get; set; }
         public Manufacturer Manufacturer { get; set; }
         public int PassengerCount { get; set; }
@@ -23,5 +22,6 @@ namespace WebApplication.BLL.DataTransferObjects
         public int SmallLuggageCount { get; set; }
         public int LargeLuggageCount { get; set; }
         public decimal Price { get; set; }
+        public string Photo { get; set; }
     }
 }

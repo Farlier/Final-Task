@@ -17,6 +17,8 @@ namespace WebApplication.DAL.Repositories
         ManufacturerRepository manufacturerRepository;
         OrderRepository orderRepository;
         QualityClassRepository qualityClassRepository;
+        CarInUseRepository carInUseRepository;
+        ServiceRepository serviceRepository;
 
         public UnitOfWork(string connectionString)
         {
@@ -75,6 +77,28 @@ namespace WebApplication.DAL.Repositories
                 return orderRepository;
             }
         }
+
+        public IRepository<CarInUse> CarsInUse
+        {
+            get
+            {
+                if (carInUseRepository == null)
+                    carInUseRepository = new CarInUseRepository(db);
+                return carInUseRepository;
+            }
+        }
+
+        public IRepository<ServiceEntity> Services
+        {
+            get
+            {
+                if (serviceRepository == null)
+                    serviceRepository = new ServiceRepository(db);
+                return serviceRepository;
+            }
+        }
+
+
 
         public virtual void Dispose(bool disposing)
         {

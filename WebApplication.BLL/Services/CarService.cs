@@ -16,7 +16,6 @@ namespace WebApplication.BLL.Services
     public class CarService : ICarService
     {
         IUnitOfWork Db { get; set; }
-
         public CarService(IUnitOfWork unit)
         {
             Db = unit;
@@ -50,8 +49,8 @@ namespace WebApplication.BLL.Services
         }
 
         public IEnumerable<CarDTO> GetAvaibleCars()
-        {
-            var cars = Db.Cars.GetAll().Where(it => it.AvaibleNow == true).ToList();
+        { 
+            var cars = Db.Cars.GetAll().Except(Db.CarsInUse.GetAll().ToList());
             var mapper = new MapperConfiguration(cg => cg.CreateMap<Car, CarDTO>()).CreateMapper();
             var carsDto = mapper.Map<IEnumerable<Car>, List<CarDTO>>(cars);
 
@@ -65,8 +64,6 @@ namespace WebApplication.BLL.Services
             Db.Cars.Create(car);
             Db.Save();
         }
-
-       
 
         public QualityClassDTO GetQualityClass(int? id)
         {
@@ -82,9 +79,22 @@ namespace WebApplication.BLL.Services
 
         public IEnumerable<QualityClassDTO> GetQualityClassDTOs()
         {
-            var mapper = new MapperConfiguration(cg => cg.CreateMap<QualityClass,QualityClassDTO>()).CreateMapper();
+            var mapper = new MapperConfiguration(cg => cg.CreateMap<QualityClass, QualityClassDTO>()).CreateMapper();
             var qc = mapper.Map<IEnumerable<QualityClass>, List<QualityClassDTO>>(Db.QualityClasses.GetAll());
             return qc;
+        }
+
+        public void DeleteCar(CarDTO item)
+        {
+            Db.Cars.Delete(item.Id);
+            Db.Save();
+        }
+
+        public void DeleteCars(IEnumerable<CarDTO> item)
+        {
+            foreach (var it in item)
+                Db.Cars.Delete(it.Id);
+            Db.Save();
         }
     }
 }

@@ -1,0 +1,15 @@
+﻿@model WebApplication.Models.FilterModels.ManufacturerFilter
+
+
+
+
+
+<div class="form-group">
+    @Html.DisplayTextFor(model => model.ManufacturerName)
+    <div class="col-md-10">
+        <div class="checkbox">
+            @Html.EditorFor(model => model.Checked)
+            @Html.ValidationMessageFor(model => model.Checked, "", new { @class = "text-danger" })
+        </div>
+    </div>
+</div>
